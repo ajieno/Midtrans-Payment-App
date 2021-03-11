@@ -1,12 +1,13 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
 }
 
 android {
     compileSdkVersion 29
     buildToolsVersion "30.0.3"
-
+    flavorDimensions "mode"
     defaultConfig {
         applicationId "com.ajieno.midtranspayment"
         minSdkVersion 21
@@ -15,6 +16,22 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    productFlavors{
+        sandbox{
+//            dimension = "mode"
+            applicationId = "com.ajieno.midtraspayment.sandbox"
+            resValue "String", "app_name", "Midtrans Payment"
+            buildConfigField "String", "BASE_URL", "\"https://herbi-app.herokuapp.com/\""
+            buildConfigField "String", "CLIENT_KEY", "\"SB-Mid-client-XqMoA660qtong7uk\""
+        }
+//        production{
+//            applicationId = "com.ajieno.midtraspayment.sandbox"
+//            resValue "String", "app_name", "Midtrans Payment"
+//            buildConfigField "String", "BASE_URL", "\"https://herbi-app.herokuapp.com/\""
+//            buildConfigField "String", "CLIENT_KEY", "\"\""
+//        }
     }
 
     buildTypes {
@@ -42,4 +59,7 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation 'com.midtrans:uikit:1.26.0-SANDBOX' // change the number to the latest version
+//    implementation 'com.midtrans:uikit:1.26.0' // change the number to the latest version
 }
